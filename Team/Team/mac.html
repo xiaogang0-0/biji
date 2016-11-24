@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no" />
+	<title>Document</title>
+	<style type="text/css">
+		body {
+			position: relative;
+			margin: 0;
+			width: 100vw;
+			height: 100vh;
+			overflow: hidden;
+		}
+		ul,
+		li {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		img {
+			vertical-align: top;
+		}
+		#mac {
+			width: 100vw;
+			height: 100vh;
+			min-width: 1200px;
+			min-height: 800px;
+			background: url(mac_img/1.jpg) no-repeat 0 0;
+			background-size: 100%;
+		}
+		#mac_header {
+			width: 100vw;
+			height: 22px;
+			background: rgb(206,206,206);
+		}
+		#mac_footer {
+			width: 870px;
+			height: 48px;
+			position: absolute;
+			left: 20vw;
+			bottom: 0;
+			background: rgba(206,206,206,.4);
+			border-radius: 5px;
+		}
+		#logo {
+			display: inline-block;
+			width: 22px;
+			height: 22px;
+			margin: 0 0 0 8px;
+			background: url(mac_img/ico/apple.png) no-repeat 2px 2px;
+			-webkit-background-size: 90%;
+			background-size: 90%;
+		}
+		#mac_hearer_left {
+			display: inline-block;
+		}
+		#mac_hearer_left span{
+			float: left;
+			margin-left: 10px;
+			font: bold 14px/22px "simsun",arial;
+			border: 8px solid rgb(206,206,206);
+			border-top: none;
+			border-bottom: none;
+			color: #000;
+		}
+		#mac_hearer_right {
+			float: right;
+		}
+		#mac_hearer_right span {
+			float: left;
+			width: 18px;
+			height: 18px;
+			margin: 2px 0 0 10px;
+		}
+		#mac_hearer_right #more {
+			background: url(mac_img/ico/list.png) no-repeat 0 0;
+			-webkit-background-size: 100%;
+			background-size: 100%;
+			margin-right: 10px;
+		}
+		#search{
+			background: url(mac_img/ico/research.png) no-repeat 0 0;
+			-webkit-background-size: 100%;
+			background-size: 100%;
+		}
+		#mac_hearer_right #time {
+			width: 70px;
+			margin-right: -10px;
+			font: 12px/18px "simsun",arial;
+		}
+		#keyb {
+			background: url(mac_img/ico/baidu.png) no-repeat 0 0;
+			-webkit-background-size: 100%;
+			background-size: 100%;
+		}
+		#battery {
+			background: url(mac_img/ico/charge_battery.png) no-repeat 0 0;
+			-webkit-background-size: 100%;
+			background-size: 100%;
+		}
+		#mac_hearer_right #wifi {
+			background: url(mac_img/ico/wifi-2.png) no-repeat 0 0;
+			-webkit-background-size: 100%;
+			background-size: 100%;
+			margin-top: 4px;
+		}
+		#h_qq {
+			background: url(mac_img/ico/qq.png) no-repeat 0 0;
+			-webkit-background-size: 100%;
+			background-size: 100%;
+		}
+		#h_wx {
+			background: url(mac_img/ico/微信.png) no-repeat 0 0;
+			-webkit-background-size: 100%;
+			background-size: 100%;
+		}
+		#blue {
+			background: url(mac_img/ico/蓝牙.png) no-repeat 0 0;
+			-webkit-background-size: 100%;
+			background-size: 100%;
+		}
+		#mac_footer span {
+			position: relative;
+			float: left;
+			width: 40px;
+			height: 40px;
+			margin: 4px 4px;
+			transition: .2s;
+		}
+		.f_finder {
+			background: url(mac_img/ico/Finder.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_pad {
+			background: url(mac_img/ico/launchpad.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_safari {
+			background: url(mac_img/ico/safari.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_calendar {
+			background: url(mac_img/ico/calendar.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_contacts {
+			background: url(mac_img/ico/contacts.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_facetime {
+			background: url(mac_img/ico/facetime.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_mail {
+			background: url(mac_img/ico/mail.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_maps {
+			background: url(mac_img/ico/maps.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_notes {
+			background: url(mac_img/ico/notes.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_gamecenter {
+			background: url(mac_img/ico/gamecenter.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_appstore {
+			background: url(mac_img/ico/appstore.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_gamecenter {
+			background: url(mac_img/ico/gamecenter.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_set {
+			background: url(mac_img/ico/systempreferences.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_sublime {
+			background: url(mac_img/ico/SublimeText.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_wx {
+			background: url(mac_img/ico/wxico.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_chrome {
+			background: url(mac_img/ico/chrome.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_github {
+			background: url(mac_img/ico/github.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_download {
+			background: url(mac_img/ico/下载.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		.f_dele {
+			background: url(mac_img/ico/dele.png) no-repeat 0 0;
+			background-size: 100%;
+		}
+		#top_list {
+			position: absolute;
+			top: 22px;
+			left: 10px;
+		}
+		#top_list ul {
+			display: none;
+			position: absolute;
+			width: 150px;
+			top: 0;
+			background: rgb(206,206,206);
+			font: bold 14px/26px "simsun",arial;
+			color: #000;
+			border-radius:0 0 5px 5px;
+			border: 1px solid #b8b8b8;
+			text-indent: 1.5em;
+		}
+		.logo {
+			left: 0;
+		}
+		.finder {
+			left: 44px;
+		}
+		.doc {
+			left: 114px;
+		}
+		.edit {
+			left: 171px;
+		}
+		.disp {
+			left: 226px;
+		}
+		#top_list .go {
+			width: 180px;
+			left: 279px;
+		}
+		.wind {
+			left: 333px;
+		}
+		#top_list .help {
+			width: 200px;
+			left: 387px;
+		}
+		#top_list .help input {
+			outline: none;
+			padding: 0;
+			border: none;
+			border-radius: 5px;
+			text-indent: 2em;
+			font: 12px/18px "simsun",arial;
+			color: #000;
+		}
+		#top_list .help li {
+			border-bottom: 1px solid #b8b8b8;
+		}
+		#top_list_r .r_search {
+			top: 30vh;
+			right: 34vw;
+			width: 500px;
+			-webkit-appearance: none;
+			border: none;
+			margin: 0;
+			text-indent: 0;
+			border-radius: 10px;
+		}
+		#top_list_r .r_search li {
+			border-radius: 10px;
+		}
+		#top_list_r .r_search input {
+			width: 500px;
+			height: 50px;
+			border: 1px solid #000;
+			border-radius: 10px;
+			outline: none;
+			font: 24px/50px "simsun",arial;
+			color: #000;
+			text-indent: 2em;
+		}
+		#top_list_r {
+			position: absolute;
+			top: 22px;
+			right: 10px;
+		}
+		#top_list_r ul {
+			display: none;
+			position: absolute;
+			width: 150px;
+			top: 0;
+			right: 0;
+			background: rgb(206,206,206);
+			font: bold 14px/26px "simsun",arial;
+			color: #000;
+			border-radius:0 0 5px 5px;
+			border: 1px solid #b8b8b8;
+			text-indent: 1.5em;
+		}
+		#top_list_r .r_wx,
+		#top_list_r .r_qq{
+			top: 30vh;
+			right: 36vw;
+			width: 500px;
+			background: none;
+			border: none;
+		}
+		#top_list_r .r_wifi {
+			width: 180px;
+			right: 46px;
+		}
+		#top_list_r .r_keyb {
+			right: -8px;
+		}
+		#top_list_r .r_battery {
+			right: 49px;
+		}
+		#top_list_r .r_blue {
+			right: 1px;
+			width: 170px;	
+		}
+		#top_list_r .r_time {
+			width: 160px;
+			right: 45px;
+		}
+		#canvas {
+			position: absolute;
+			top: 30vh;
+			left: -300px;
+		}
+		#email {
+			position: absolute;
+			top: -80vh;
+			left: 20vw;
+			width: 60vw;
+			height: 80vh;
+			background: #fff;
+			text-align: center;
+			background: rgba(255,255,255,.5);
+			border-radius: 10px;
+		}
+		#email img {
+			display: inline-block;
+			width: 50%;
+			height: 50%;
+		}
+		h2,
+		p {
+			margin: 0;
+			padding: 0;
+		}
+		#email h2 {
+			color: #000;
+			font: 22px/40px 'simsun',arial;
+		}
+		#email p {
+			padding: 5vw;
+			text-indent: 2em;
+			color: #000;
+			font: bold 16px/24px 'simsun',arial;
+		}
+		#email #closeEm {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 14px;
+			height: 14px;
+			border-radius: 50%;
+			background: red;
+			font: 12px/12px arial;
+			color: #000;
+		}
+		a {
+			text-decoration: none;
+		}
+		#mac .r_more {
+			position: absolute;
+			right: 0;
+			top: 22px;
+			width: 400px;
+			height: 100vh;
+			background: rgba(255,255,255,.5);
+		}
+		.r_more h2 {
+			text-align: center;
+			border-bottom: 1px solid #bfbfbf;
+			padding: 10px;
+			color: #4d4d4d;
+		}
+		#more_time {
+			font: 36px/50px "simsun",arial;
+			color: #4d4d4d;
+			padding: 15px;
+			text-align: center;
+		}
+		#more_calender {
+			width: 90%;
+			margin: 15px auto;
+			background: rgba(255,255,255,.5);
+			border-radius: 10px;
+		}
+		#more_calender h3 {
+			text-align: center;
+			font: bold 16px/24px 'simsun';
+			color: #000;
+			background: url(mac_img/ico/calendar.png) no-repeat 0 0;
+			background-color: rgba(255,255,255,.6);
+			background-size: 7%;
+		}
+		#more_calender table {
+			font:bold 14px/16px arial;
+			text-align: center;
+		}
+		#more_calender th,
+		#more_calender td{
+			padding: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div id="mac">
+		<canvas width="200" height="200" id="canvas"></canvas>
+		<div id="email">
+			<h2>mac os x使用Git简易入门教程</h2>
+			<img src="mac_img/hil.gif"><img src="mac_img/tru.gif">
+			<p>Git相比SVN，CVS，最大的特点也是优点在于提供分布式的代码管理。这不是说SVN等不具有该功能，但就目前来看，Git更完善，而且也越来越多地被人们所接受。前途和易用是我一向选择的基准。在使用中，目前体验到最大的相SVN的好处有；分支代码只有一份！log在本地！合并代码更加方便！更加安全！目录更加简洁！</p>
+			<a href="javascript:;" id="closeEm">x</a>
+		</div>
+		<header id="mac_header">
+			<div id="mac_hearer_left">
+				<span id="logo"></span>
+				<span>Finder</span>
+				<span>文件</span>
+				<span>编辑</span>
+				<span>显示</span>
+				<span>前往</span>
+				<span>窗口</span>
+				<span>帮助</span>
+			</div>
+			<div id="mac_hearer_right">
+				<span id="h_wx"></span>
+				<span id="h_qq"></span>
+				<span id="wifi"></span>
+				<span id="battery"></span>
+				<span id="blue"></span>
+				<span id="keyb"></span>
+				<span id='time'>周日21:01</span>
+				<span id="search"></span>
+				<span id='more'></span>
+			</div>
+		</header>
+		<footer id="mac_footer">
+			<span class="f_finder"></span>
+			<span class="f_pad"></span>
+			<span class="f_safari"></span>
+			<span class="f_calendar"></span>
+			<span class="f_contacts"></span>
+			<span class="f_facetime"></span>
+			<span class="f_mail"></span>
+			<span class="f_maps"></span>
+			<span class="f_notes"></span>
+			<span class="f_gamecenter"></span>
+			<span class="f_appstore"></span>
+			<span class="f_set"></span>
+			<span class="f_sublime"></span>
+			<span class="f_wx"></span>
+			<span class="f_github"></span>
+			<span class="f_chrome"></span>
+			<span class="f_download"></span>
+			<span class="f_dele"></span>
+		</footer>
+		<div id="top_list">
+			<ul class="logo">
+				<li>关于本机</li>
+				<li>系统偏好设置...</li>
+				<li>Apple Store...</li>
+				<li>强制退出</li>
+				<li>睡眠</li>
+				<li>关机</li>
+				<li>重新启动...</li>
+				<li>关机...</li>
+				<li>注销...</li>
+			</ul>
+			<ul class="finder">
+				<li>关于Finder</li>
+				<li>偏好设置...</li>
+				<li>清倒废纸篓</li>
+				<li>服务</li>
+				<li>隐藏Finder</li>
+				<li>隐藏其他</li>
+			</ul>
+			<ul class="doc">
+				<li>新建Finder窗口</li>
+				<li>新建文件夹</li>
+				<li>新建智能文件夹</li>
+				<li>新建标签页</li>
+				<li>在新标签页中打开</li>
+				<li>显示摘要信息</li>
+				<li>压缩</li>
+				<li>查找</li>
+			</ul>
+			<ul class="edit">
+				<li>拷贝</li>
+				<li>重做</li>
+				<li>剪切</li>
+				<li>拷贝</li>
+				<li>粘贴</li>
+				<li>全选</li>
+				<li>显示剪切板</li>
+				<li>表情与符号</li>
+			</ul>
+			<ul class="disp">
+				<li>为图标</li>
+				<li>为列表</li>
+				<li>为分栏</li>
+				<li>为Cover Flow</li>
+				<li>整理</li>
+				<li>整理方法按</li>
+				<li>排序方式</li>
+				<li>隐藏标签页栏</li>
+				<li>隐藏路径栏</li>
+				<li>隐藏状态栏</li>
+				<li>隐藏边栏</li>
+				<li>隐藏预览</li>
+				<li>工具栏</li>
+				<li>自定义工具栏...</li>
+				<li>查看显示选项</li>
+				<li>进入全屏幕</li>
+			</ul>
+			<ul class="go">
+				<li>向后</li>
+				<li>向前</li>
+				<li>新窗口中的上层文件夹</li>
+				<li>我的所有文件</li>
+				<li>文稿</li>
+				<li>桌面</li>
+				<li>下载</li>
+				<li>个人</li>
+				<li>电脑</li>
+				<li>AirDrop</li>
+				<li>网络</li>
+				<li>iCloud Drive</li>
+				<li>应用程序</li>
+				<li>实用工具</li>
+				<li>前往分拣家...</li>
+				<li>连接服务器...</li>
+			</ul>
+			<ul class="wind">
+				<li>最小化</li>
+				<li>缩放</li>
+				<li>循环显示窗口</li>
+				<li>显示上一个标签页</li>
+				<li>显示下一个标签页</li>
+				<li>将标签页移到新窗口</li>
+				<li>合并所有窗口</li>
+				<li>前置全部窗口</li>
+				<li>剪切板</li>
+			</ul>
+			<ul class="help">
+				<li>
+				搜索	<input type="text" name="">
+				</li>
+				<li>Mac 帮助</li>
+				<li>macOS的新功能</li>
+				<li>Mac新手</li>
+			</ul>
+		</div>
+		<div id="top_list_r">
+			<ul class="r_wx">
+				<li>
+					<img src="mac_img/2.jpg">
+				</li>
+			</ul>
+			<ul class="r_qq">
+				<li>
+					<img src="mac_img/3.png">
+				</li>
+			</ul>
+			<ul class="r_wifi">
+				<li>Wi-Fi: 正在查找网络...</li>
+				<li>关闭Wi-Fi</li>	
+				<li style="background:#85c8e8">mac</li>
+				<li>huawei</li>
+				<li>iphone</li>
+				<li>Tenda_288218</li>
+				<li>TP-LINK_32D5</li>
+			</ul>
+			<ul class="r_battery">
+				<li>电池已充满电</li>
+				<li>电源:电源适配器</li>
+				<li>显示百分比</li>
+				<li>打开节能偏好设置</li>
+			</ul>
+			<ul class="r_blue">
+				<li>蓝牙:打开</li>	
+				<li>关闭蓝牙</li>
+				<li>设备</li>
+				<li>MX Master</li>
+				<li>UE Mobile Boombox</li>
+				<li>将文件发送到设备...</li>
+				<li>浏览设备上的文件...</li>
+				<li>打开蓝牙偏好设置...</li>
+			</ul>
+			<ul class="r_keyb">
+				<li>美国</li>
+				<li>百度拼音</li>
+				<hr>
+				<li>英文状态</li>
+				<li>繁体</li>
+				<li>全角</li>
+				<li>表情&符号</li>
+				<li>英文助手</li>
+				<li>花漾字</li>
+				<li>手写输入</li>
+				<li>屏幕截图</li>
+				<li>皮肤编辑器</li>
+				<hr>
+				<li>偏好设置</li>
+				<li>皮肤外观</li>
+				<li>登录&同步</li>
+				<li>同步通讯录</li>
+				<hr>
+				<li>意见反馈</li>
+				<li>关于</li>
+				<li>编辑文本替换...</li>
+				<li>显示输入法名称</li>
+				<li>打开键盘偏好设置...</li>
+			</ul>
+			<ul class="r_time">
+				<li>2016年11月22日</li>	
+				<hr>
+				<li>以模拟方式显示</li>
+				<li>以数码方式显示</li>
+				<hr>
+				<li>打开日期与事件偏好...</li>
+			</ul>
+			<ul class="r_search">
+				<li>
+					<input type="text" name="" placeholder="Spotlight" autofocus>
+					<span id="search_logo"></span>
+				</li>
+			</ul>
+		</div>
+		<div class="r_more">
+			<h2>今天</h2>
+			<div id="more_time"></div>
+			<div id="more_weather"></div>
+			<div id="more_calender">
+				<h3>11月</h3>
+				<table cellspacing="0" cellpadding="0">
+					<thead>
+						<th>周日</th>
+						<th>周一</th>
+						<th>周二</th>
+						<th>周三</th>
+						<th>周四</th>
+						<th>周五</th>
+						<th>周六</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td>30日</td>
+							<td>31日</td>
+							<td>1日</td>
+							<td>2日</td>
+							<td>3日</td>
+							<td>4日</td>
+							<td>5日</td>
+						</tr>
+						<tr>
+							<td>6日</td>
+							<td>7日</td>
+							<td>8日</td>
+							<td>9日</td>
+							<td>10日</td>
+							<td>11日</td>
+							<td>12日</td>
+						</tr>
+						<tr>
+							<td>13日</td>
+							<td>14日</td>
+							<td>15日</td>
+							<td>16日</td>
+							<td>17日</td>
+							<td>18日</td>
+							<td>19日</td>
+						</tr>
+						<tr>
+							<td>20日</td>
+							<td>21日</td>
+							<td>22日</td>
+							<td>23日</td>
+							<td>24日</td>
+							<td>25日</td>
+							<td>26日</td>
+						</tr>
+						<tr>
+							<td>27日</td>
+							<td>28日</td>
+							<td>29日</td>
+							<td>30日</td>
+							<td>1日</td>
+							<td>2日</td>
+							<td>3日</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="more_info"></div>
+		</div>
+	</div>
+<script type="text/javascript" src = 'JS/public.js'></script>
+<script type="text/javascript" src = 'JS/mac.js'></script>
+</body>
+</html>
