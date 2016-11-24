@@ -1,10 +1,163 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>右键模拟</title>
+<style>
+  * {margin: 0; padding: 0;}
+   * {margin: 0; padding: 0;}
+  h2 {font-size: 12px; font-weight: normal; height: 30px; line-height: 30px; width:  133px; padding-left: 15px;}
+  .active {border: 1px solid #999; height: 28px; line-height: 28px; background: #ccc; cursor: default;}
+  ul {width: 150px; background: #99F; border: 1px solid #888;}
+  li {position: relative; list-style: none; float: left;}
+  li.active h2 {border: 1px solid #999; height: 28px; line-height: 28px; background: #ccc; cursor: default;}
+  li.active span {border-color: #ccc #ccc #ccc #333;}
+  #menu {position: absolute; display: none;}
+  #menu ul {position: absolute; top: 0; left: 145px; display: none;}
+  span {display: block; width: 0; height: 0; border-width: 4px; border-style: solid; border-color: #99F #99F #99F #333; font-size: 0; line-height: 0; float: right; position: absolute; top: 10px; right: 15px;}
+  li h2.active span{border-color: #ccc #ccc #ccc #333;}
+
+/*  #menu li:hover{
+      border: 1px solid #999; height: 28px; line-height: 28px; background: #ccc; cursor: default;
+  }
+  #menu li:hover span {
+    border-color: #ccc #ccc #ccc #333;
+  }*/
+</style>
 </head>
 <body>
-  
+  <ul id="menu">
+    <li calss="active"><h2 calss="active">显示卡属性</h2></li>
+    <li><h2>查看<span></span></h2>
+      <ul>
+        <li calss="active"><h2 calss="active">大图标</h2></li>
+        <li calss="active"><h2 calss="active">中等图标</h2></li>
+        <li><h2>小图标</h2></li>
+        <li><h2>自动排列图标</h2></li>
+        <li><h2>将图标与网格对齐</h2></li>
+        <li><h2>显示桌面图标</h2></li>
+        <li><h2>显示桌面小工具</h2></li>
+      </ul>
+    </li>
+    <li><h2>排序方式<span></span></h2>
+      <ul>
+        <li><h2>名称</h2></li>
+        <li><h2>类型</h2></li>
+        <li><h2>项目类型</h2></li>
+        <li><h2>修改日期</h2></li>
+      </ul>
+    </li>
+    <li><h2>刷新</h2></li>
+    <li><h2>图形选项<span></span></h2>
+      <ul>
+        <li><h2>屏面适应<span></span></h2>
+          <ul>
+            <li><h2>保持显示缩放比</h2></li>
+          </ul>
+        </li>
+        <li><h2>快捷键<span></span></h2>
+          <ul>
+            <li><h2>启用</h2></li>
+            <li><h2>禁用</h2></li>
+          </ul>
+        </li>
+        <li><h2>系统拖盘图标<span></span></h2>
+          <ul>
+            <li><h2>启用</h2></li>
+            <li><h2>禁用</h2></li>
+          </ul>
+        </li>
+        <li><h2>气球通知<span></span></h2>
+          <ul>
+            <li><h2>图形属性通知<span></span></h2>
+              <ul>
+                <li><h2>启用</h2></li>
+                <li><h2>禁用</h2></li>
+              </ul>
+            </li>
+            <li><h2>最佳分辨率通知<span></span></h2>
+              <ul>
+                <li><h2>启用</h2></li>
+                <li><h2>禁用</h2></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><h2>旋转<span></span></h2>
+          <ul>
+            <li><h2>旋转至正常</h2></li>
+            <li><h2>旋转至90度</h2></li>
+            <li><h2>旋转至180度</h2></li>
+            <li><h2>旋转至270度</h2></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><h2>个性化</h2></li>
+  </ul>
+
 </body>
+<script type="text/javascript">
+(function(d){
+    var menu = d.getElementById('menu');
+    var h2 = menu.getElementsByTagName('h2');//获取所的 h2类数组
+    var h2s = Array.from(h2);//转化成数组
+
+    document.onclick = function(){//当点击页面的时候关闭 这个任务栏
+        menu.style.display = 'none';
+     }
+
+
+
+    document.oncontextmenu = function(e){//鼠标右键时间
+          var l = e.pageX;//获取鼠标所在位置
+          var t = e.pageY;//获取鼠标所在位置
+         
+          menu.style.left = l +'px'; //显示在鼠标位置
+          menu.style.top = t + 'px';//显示在鼠标位置
+          menu.style.display = 'block';//元素显示
+          return false;//阻止默认行为
+    }
+
+    h2s.forEach(function(item,i){//循环数组所有h2添加移入事件
+      item.addEventListener('mouseover',over);
+    });
+
+    function  over(){
+          var parent = this.parentNode;//li  移入h2的父级li
+          //var pp = parent.parentNode;//ul  移入h2的父级li的父级ul
+          //var li = pp.children;//ul li*   父级的父级下所有的li
+          var li = this.parentNode.parentNode.children;//h2父级的父级下所有的li
+          for (var i = 0; i < li.length; i++) {
+                if(li[i] != parent){
+                    var ul = li[i].getElementsByTagName('ul');//找到父级的父级其他li下所有的ul
+                    for(var j=0;j<ul.length;j++){
+                      ul[j].style.display = 'none';
+                    }
+                }
+          };
+
+          for(var i=0;i<h2.length;i++){//每次都大清洗 清除所有的 active
+            h2[i].className = '';
+          }
+          active(this);
+          function active(h2){//添加active的函数
+            h2.className = 'active';//当前的添加选中
+            if(h2.parentNode.parentNode.previousElementSibling){//如果当前的父级的父级的上一个兄弟节点h2存在 就继续递归添加active
+              active(h2.parentNode.parentNode.previousElementSibling)
+            }
+          }
+
+          if(this.nextElementSibling){//如果当前的h2存在下一个兄弟节点 那么就让下面的节点显示
+            this.nextElementSibling.style.display = 'block';
+          }
+
+
+    }
+
+
+
+
+})(document); 
+</script>
 </html>
