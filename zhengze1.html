@@ -49,7 +49,8 @@
          <span>用户QQ ：</span><input type="text">
          <span>用户邮箱：</span><input type="text">
          <span>生日：</span><input type="text">
-         <input type="submit" value="点击提交" id="btn">
+         <!-- <input type="submit" value="点击提交" id="btn"> -->
+         <input type="button" value="点击提交" id="btn">
       </form>
   </div>
  
@@ -88,16 +89,17 @@ window.onload = function(){
 
             if(ren.test(text[2].value)){//生日输入正确的话    
                 time()//调用时间函数  返回时间对象
+                 text[2].className = 'green';
                 text[2].value.replace(/(\d+)\D+(\d+)\D+(\d+)/g,function($0,$1,$2,$3){//console.log($0,$1,$2,$3)
-                          text[2].className = 'green';
+                         
                           if($1 > obj.year){//大于当前年数直接就不对了
-                                text[2].className = 'show';
+                                return text[2].className = 'show';
                           }
                           if($1 == obj.year && $2 > obj.month){//当前年数当前月
-                                   text[2].className = 'show';
+                                return text[2].className = 'show';
                          }
                           if($1 == obj.year && $2 == obj.month && $3 > obj.day){//当前年数当前月当前日
-                                   text[2].className = 'show';
+                                return text[2].className = 'show';
                          }
                 })
             }else{
@@ -110,7 +112,7 @@ window.onload = function(){
               var date = new Date();  //创建时间对象
               var year = date.getFullYear(); //获取年份
               var month = date.getMonth()+1; //获取月份 0 - 11 获取到的月份要加1才是当前月份
-              var day = date.getDate(); //获取日期 1 - 31
+              var day = adte.getDate(); //获取日期 1 - 31
 
               obj = {
                   year:year,
@@ -121,7 +123,7 @@ window.onload = function(){
         }
 
         function  blur(){//失焦事件
-             text[0].onblur = function(){
+            text[0].onblur = function(){
                     if(QQ.test(text[0].value)){//QQ输入正确的话
                          text[0].className = 'green';
                     }else{
