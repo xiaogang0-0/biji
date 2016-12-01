@@ -11,13 +11,87 @@
     width: 100px;
     height: 100px;
     background: green;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 </style>
 </head>
 <body>
-  <div class="box"></div>
+  <div class="box" id="box1"></div>
 </body>
 <script type="text/javascript">
     
+  // Move('box1');
+  // function Move(id){
+  //     var box = document.getElementById(id);
+    
+  //     box.addEventListener('mousedown',Fndow);
+  //     function Fndow(e){
+  //           var disX= e.pageX - box.offsetLeft;
+  //           var disY= e.pageY - box.offsetTop;
+
+  //           document.addEventListener('mousemove',Fnmove);
+
+  //           function Fnmove(e){
+  //               box.style.left = e.pageX -disX +'px';
+  //               box.style.top = e.pageY -disY +'px'; 
+  //           }
+  //           document.addEventListener('mouseup',Fnup);
+
+  //           function Fnup(){//抬起事件 
+  //              document.removeEventListener('mousemove',Fnmove);
+  //              document.removeEventListener('mouseup',Fnup);
+  //           }
+  //       }
+  //       return false;
+  // }
+
+  function Move(id){//函数原型
+      this.box = document.getElementById(id);
+
+       var _this = this;
+      this.box.addEventListener('mousedown',function(){
+              var e = window.event;
+              _this.fndow();
+
+      });   
+  }
+
+  Move.prototype.fndow = function(e){
+      var e = window.event;
+      this.disX = e.pageX - this.box.offsetLeft;
+      this.disY = e.pageY - this.box.offsetTop;
+
+       var _this = this;
+       var a = function(){
+              _this.fnmove();
+       }
+       var c = function(){
+             _this.Fnup();
+       }
+
+      document.addEventListener('mousemove',a);
+      document.addEventListener('mouseup',c);
+  }
+  Move.prototype.fnmove = function(e){
+        var e = window.event;
+         this.box.style.left = e.pageX -this.disX +'px';
+         this.box.style.top = e.pageY -this.disY +'px'; 
+  } 
+
+
+Move.prototype.Fnup = function(){
+       document.removeEventListener('mousemove',a);
+       document.removeEventListener('mouseup',c);
+}
+  
+
+
+
+
+
+var n = new Move('box1');
+// console.log(n.box)
 </script>
 </html>
