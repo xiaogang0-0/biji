@@ -15,10 +15,17 @@
     top: 0;
     left: 0;
   }
+    #box2 {
+    background: yellow;
+    position: absolute;
+    top: 0px;
+    left: 110px;
+  }
 </style>
 </head>
 <body>
   <div class="box" id="box1"></div>
+  <div class="box" id="box2"></div>
 </body>
 <script type="text/javascript">
     
@@ -47,12 +54,10 @@
   //       return false;
   // }
 
-  function Move(id){//函数类
+  function Move(id){//函数类  构造函数
       this.box = document.getElementById(id);
       this.disX = 0;
-      this.disY = 0;
-
-      this.init();  
+      this.disY = 0; 
   }
 
   Move.prototype.init = function(e){
@@ -62,27 +67,17 @@
         });   
   }
   Move.prototype.fndow = function(e){
-      //var e = window.event;
       this.disX = e.pageX - this.box.offsetLeft;
       this.disY = e.pageY - this.box.offsetTop;
-
-       var _this = this;
-
-       
+      var _this = this;
 
       document.addEventListener('mousemove',a);
       document.addEventListener('mouseup',c);
 
-      function a(e){
-              _this.fnmove(e);
-       }
+      function a(e){ _this.fnmove(e);}
+      function c(){ _this.Fnup(a,c);}
 
-       function c(){
-             _this.Fnup(a,c);
-       }
-
-      e.preventDefault();
-  
+      e.preventDefault();//阻止默认行为
   }
   Move.prototype.fnmove = function(e){
          this.box.style.left = e.pageX -this.disX +'px';
@@ -93,13 +88,47 @@ Move.prototype.Fnup = function(move,up){//形参
              document.removeEventListener('mouseup',up);
   }
 
+function Move2(id){//拖拽的另一个构造函数 就是类
+      Move.call(this,id);//克隆属性
+}
+
+clone(Move,Move2);//克隆原型方法的函数
 
 
+
+Move2.prototype.fnmove = function(e){
+        var l = e.pageX -this.disX;
+        var t = e.pageY -this.disY;
+        if(l > document.documentElement.clientWidth-this.box.clientWidth){
+            l = document.documentElement.clientWidth-this.box.clientWidth;
+        }else if(l < 0){
+              l = 0;
+        }
+        if(t > document.documentElement.clientHeight-this.box.clientHeight){
+            t = document.documentElement.clientHeight-this.box.clientHeight;
+        }else if(t < 0){
+              t = 0;
+        }
+         this.box.style.left = l +'px';
+         this.box.style.top = t +'px'; 
+  } 
 
 
 
 
 var n = new Move('box1');
-// console.log(n.box)
+var m = new Move2('box2');
+n.init();
+m.init();
+
+
+//克隆原型方法的函数
+function clone(P,N){//P是父级prototype N是新的原型  
+    for(var s  in P.prototype){
+        if(P.prototype.hasOwnProperty(s)){
+            N.prototype[s] = P.prototype[s];
+        }
+    }
+}
 </script>
 </html>
