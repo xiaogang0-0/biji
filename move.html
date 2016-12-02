@@ -47,45 +47,53 @@
   //       return false;
   // }
 
-  function Move(id){//函数原型
+  function Move(id){//函数类
       this.box = document.getElementById(id);
+      this.disX = 0;
+      this.disY = 0;
 
-       var _this = this;
-      this.box.addEventListener('mousedown',function(){
-              var e = window.event;
-              _this.fndow();
-
-      });   
+      this.init();  
   }
 
+  Move.prototype.init = function(e){
+        var _this = this;
+        this.box.addEventListener('mousedown',function(e){
+                _this.fndow(e);
+        });   
+  }
   Move.prototype.fndow = function(e){
-      var e = window.event;
+      //var e = window.event;
       this.disX = e.pageX - this.box.offsetLeft;
       this.disY = e.pageY - this.box.offsetTop;
 
        var _this = this;
-       var a = function(){
-              _this.fnmove();
-       }
-       var c = function(){
-             _this.Fnup();
-       }
+
+       
 
       document.addEventListener('mousemove',a);
       document.addEventListener('mouseup',c);
+
+      function a(e){
+              _this.fnmove(e);
+       }
+
+       function c(){
+             _this.Fnup(a,c);
+       }
+
+      e.preventDefault();
+  
   }
   Move.prototype.fnmove = function(e){
-        var e = window.event;
          this.box.style.left = e.pageX -this.disX +'px';
          this.box.style.top = e.pageY -this.disY +'px'; 
   } 
+Move.prototype.Fnup = function(move,up){//形参
+             document.removeEventListener('mousemove',move);
+             document.removeEventListener('mouseup',up);
+  }
 
 
-Move.prototype.Fnup = function(){
-       document.removeEventListener('mousemove',a);
-       document.removeEventListener('mouseup',c);
-}
-  
 
 
 
