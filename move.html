@@ -88,12 +88,17 @@ Move.prototype.Fnup = function(move,up){//形参
              document.removeEventListener('mouseup',up);
   }
 
-function Move2(id){//拖拽的另一个构造函数 就是类
-      Move.call(this,id);//克隆属性
+function Move2(id){//克隆原型属性
+      Move.call(this,id);
 }
 
-clone(Move,Move2);//克隆原型方法的函数
+//clone(Move,Move2);//克隆原型方法的函数
 
+paohui.prototype = Move.prototype;
+function paohui(){}
+var ph = new paohui;
+Move2.prototype = ph;
+Move2.prototype.constructor= Move2;//把指向指向自己
 
 
 Move2.prototype.fnmove = function(e){
@@ -109,6 +114,7 @@ Move2.prototype.fnmove = function(e){
         }else if(t < 0){
               t = 0;
         }
+
          this.box.style.left = l +'px';
          this.box.style.top = t +'px'; 
   } 
@@ -130,5 +136,7 @@ function clone(P,N){//P是父级prototype N是新的原型
         }
     }
 }
+
+
 </script>
 </html>
