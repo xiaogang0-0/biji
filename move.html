@@ -136,8 +136,28 @@ function clone(P,N){//P是父级prototype N是新的原型
         }
     }
 }
-function clone1(){//对象继承
 
+
+
+function clone1(){//对象继承
+      var obj = {
+          say:function(){
+         console.log(1)
+      },
+      running:function(){
+           console.log(2)
+      }
+    }
+  //  var obj2 = obj;
+    paoh.prototype = obj;
+    function paoh(){}
+    var ph = new paoh;
+    obj2 = ph;
+    obj2.say = function(){
+      alert(1);
+    }
+    
+    obj.say();
 }
 
 </script>
