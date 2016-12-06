@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>留言板</title>
+  <style type="text/css">
+  body,
+p {
+  margin: 0;
+} 
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+input,
+textarea {
+  border: 1px solid #999;
+  padding: 0;
+  margin: 0;
+  display: block;
+  outline: none;
+}
+textarea {
+  resize: none;
+  overflow: auto;
+}
+  #wrap {
+  width: 400px;
+  padding: 10px;
+  background: #ddd;
+  border: 1px solid #999;
+  margin: 30px auto;
+  font: 16px/30px "宋体";
+}
+#message input,
+#message  textarea {
+  width: 100%;
+  height: 30px;
+  padding: 2px 5px;
+  box-sizing: border-box;
+  background: #fff;
+}
+#message  textarea{
+  height: 90px;
+  margin: 10px 0;
+}
+.messageHeader {
+  margin-top: 10px;
+  background: #ccc;
+  padding: 0 5px;
+  text-align: center;
+  color: #fff;
+}
+.list li {
+  background: #fff;
+  border-bottom: 1px solid #999;
+  font-size: 12px;
+  overflow: hidden;
+  height: 0;
+}
+.list header {
+  background: #f1f1f1;
+  padding: 0 5px;
+  height: 30px;
+}
+.list span {
+  float: left;
+  color: green;
+}
+.list time {
+  float: right;
+}
+.list p {
+  padding: 5px;
+  line-height: 24px;
+}
+#info {
+  background: #fefefe;
+  font: 14px/100px "宋体";
+  text-align: center;
+  overflow: hidden;
+}
+  </style>
+  <script src="JS/Tween.js"></script>
+<script type="text/javascript">
+      window.onload = function() {
+              var btn = document.querySelector('#message input[type="button"]');
+              //点击提交按钮
+              var name = document.querySelector('#message input[type="text"]');//姓名
+              var text = document.querySelector('#message textarea');//输入的内容
+              var list = document.querySelector('.list');//下面的显示留言的ul
+              var info = document.getElementById('info');//抢沙发的部分
+              var lists = list.children;//获取ul下所有的li节点
+              // console.log(lists.length)
+              btn.onclick = function() {
+                      if(!name.value || !text.value){
+                              alert('请完整输入内容');
+                              return ;
+                      }
+                      var li = document.createElement('li');//创建一个li标签    
+                      var section = document.createElement('section');//创建section,li高度为0一会获取它的高度进行展开动画             
+                      var header = document.createElement('header');//创建一个header标签
+                      var span = document.createElement('span');//创建一个san标签
+                      var time = document.createElement('time');//创建一个time标签
+                      var p = document.createElement('p');//创建一个p标签
+                    //一下添加内容要从内往外添加
+                      span.innerHTML = name.value;
+                      time.innerHTML = getTime();
+                      p.innerHTML = text.value;
+                      header.appendChild(span)//末尾添第一个span
+                      header.appendChild(time);//末尾添第一个time 有先后顺序的
+                      section.appendChild(header);
+                      section.appendChild(p);
+                      li.appendChild(section);
+
+                      if(lists.length > 0){//里面已经有元素就要往前面添加
+                            list.insertBefore(li,lists[0]);//在第0个li前添加li
+                            mTween(li,{height:section.offsetHeight},500,'linear');
+                      }else{//没有元素在末尾添加第一个 并且清除掉抢沙发       
+                           //list.appendChild(li);//在末尾添加li
+                          // info.parentNode.removeChild(info);
+                          //删除这个元素父级节点下的info节点
+                          mTween(info,{height:0},500,'linear',function(){
+                                  info.parentNode.removeChild(info);//收缩完删除这个元素父级节点下的info节点
+                                  list.appendChild(li);//在末尾添加li
+                                   mTween(li,{height:section.offsetHeight},500,'linear');//高度展开动画
+                          });    
+                      };
+                      name.value = '';   //清空输入的名字
+                      text.value = '';      // 清空输入的内容
+                      
+              }
+              function DB(num) {      //补零函数
+                  return num < 10 ? '0'+num:''+num;
+              }
+              function getTime() {    //获取时间的函数
+                    var date = new Date();
+                    var year = date.getFullYear();
+                    var month = DB(date.getMonth()+1);
+                    var day = DB(date.getDate());
+                    var hours = DB(date.getHours());
+                    var minutes = DB(date.getMinutes());
+                    return   year + '-' + month + '-' + day + '  ' + hours + ':' + minutes    
+              }
+
+          // parent
+          // document.createElement 创建标签
+          // fuji.appendChild(li)末尾添加
+          // removeChild// 删除节点
+          // fuji.insertBefore(li,lis[0])//第几个之前添加借点
+      };
+</script>
+</head>
+<body>
+<div id="wrap">
+      <div id="message">
+            <input type="text" placeholder="请输入您的名字">
+            <textarea placeholder="请输入留言内容"></textarea>
+            <input type="button" value="提交留言">
+      </div>
+      <div id="messageList">
+            <header class="messageHeader">显示留言</header>
+            <div id="info">-- 抢沙发了 --</div>
+            <ul class="list">
+                  <!-- <li>
+                        <header>
+                              <span>miaoV</span>
+                              <time>2016-10-19 10:10:10</time>
+                        </header>
+                        <p>欧低级诶我去偶家扫荡卡破
+                          的卡都的撒啥的贫困【的都没阿霞碍我的阿达爱说欧低级诶我去偶家扫荡卡破
+                          的卡都的撒啥的贫困【的都没阿霞碍我的阿达爱说欧低级诶我去偶家扫荡卡破
+                          的卡都的撒啥的贫困【的都没阿霞碍我的阿达爱说欧低级诶我去偶家扫荡卡破
+                        </p>
+                  </li> -->
+            </ul>
+      </div>
+</div>
+</body>
+</html>
