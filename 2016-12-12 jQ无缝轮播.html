@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>jQ无缝轮播</title>
+<style type="text/css">
+.wrap {
+  width: 400px;
+  height: 250px;
+  margin: 30px auto;
+  position: relative;
+  overflow: hidden;
+}
+.wrap img {
+  width: 400px;
+  height: 250px;
+}
+.wrap nav{
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  left: 30%;
+}
+.wrap div{
+    width: 200%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+  }
+.wrap img{
+  float:left;
+}
+  nav a{
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 1px solid #000;
+      border-radius: 50%;
+  }
+  nav a.active{
+      background: red;
+  }
+  li {
+    float: left;
+  }
+  ul img{
+    width: 100px;
+    height: 100px;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+        <nav>
+            <a href="javascript:;" class="active"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+      </nav>
+      <div id="box">
+            <img src="img4/img1.gif" height="330" width="810" alt="">
+            <img src="img4/img2.gif" height="330" width="808" alt="">
+      </div>
+  </div>
+  <ul>
+    <li><img src="img4/img1.gif" height="330" width="810" alt=""></li>
+    <li><img src="img4/img2.gif" height="330" width="810" alt=""></li>
+    <li><img src="img4/img3.gif" height="330" width="810" alt=""></li>
+    <li><img src="img4/img4.gif" height="330" width="810" alt=""></li>
+    <li><img src="img4/img5.gif" height="330" width="810" alt=""></li>
+    
+  </ul>
+<script type="text/javascript" src="JS/jquery-3.1.1.min.js"></script>
+<script>
+  var data = [
+     ' img4/img1.gif',
+     ' img4/img2.gif',
+     ' img4/img3.gif',
+     ' img4/img4.gif',
+     ' img4/img5.gif'
+     // ' img4/img6.gif',
+     // ' img4/img7.gif',
+     // ' img4/img8.gif'
+  ];
+  var n = 0;
+  var m = 0;
+  var timer = 0;
+  $(".wrap").on('mouseover',function(){
+            clearInterval(timer);
+  }).on('mouseout',function(){
+             timer = setInterval(function(){
+                   line();
+            },2000)
+  })
+
+  $('nav a').on('click',function(){
+          n =$(this).index()-1;
+          line();
+  })
+
+timer = setInterval(function(){
+          line();
+},2000)
+      
+
+function line(){
+       n = n>=data.length-1?0:++n;
+       m = n;
+       $('nav a').removeClass('active');//这是下面导航
+       $('nav a').eq(n).addClass('active');
+
+      $('#box').animate({left: -$('.wrap').innerWidth()},500,function(){
+                    $('#box img').eq(0).attr('src',data[n]);//第一个img
+                    $('#box').css('left',0);
+                    m = m>=data.length-1?0:++m;//n++
+                    $('#box img').eq(1).attr('src',data[m]);
+          });
+}
+
+
+
+
+</script>
+</body>
+</html>
