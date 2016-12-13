@@ -300,7 +300,16 @@ $(function(){
    	
    //全选
    
-  
+   $('#checkAll').click(function(){
+   		var c = $('#checkAll').prop('checked');
+   		tBody.find('input[type="checkbox"]').prop('checked',c);
+   		if($('#checkAll').prop('checked')){
+   			tBody.find('tr').each(function(i,e){
+   				checked.push($(e).attr('index'));
+   			})
+   		}		
+   });
+   
    
    
    
